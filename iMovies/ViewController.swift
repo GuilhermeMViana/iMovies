@@ -6,13 +6,12 @@
 //
 
 import UIKit
+import CoreData
 
 class ViewController: UIViewController {
     
-    var movies: [Movie] = []
-    
     var movie: Movie?
-
+    
     @IBOutlet weak var ivMovie: UIImageView!
     @IBOutlet weak var lbTitle: UILabel!
     @IBOutlet weak var lbCategories: UILabel!
@@ -24,17 +23,16 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         if let movie = movie {
-            ivMovie.image = UIImage(named: movie.image)
+            ivMovie.image = movie.image as? UIImage
             lbTitle.text = movie.title
             lbCategories.text = movie.categories
-            lbDuration.text = "\(movie.duration)"
+            lbDuration.text = movie.duration
             lbRating.text = "⭐️ \(movie.rating)/10"
             tvSummary.text = movie.summary
         }
-        
+
         
     }
  
-
 }
 

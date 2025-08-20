@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import CoreData
 
 class MoviesTableViewController: UITableViewController {
+    
+    var fetchedResultsController: NSFetchedResultsController<Movie>!
     
     var movies: [Movie] = []
 
@@ -22,37 +25,51 @@ class MoviesTableViewController: UITableViewController {
     }
     
     func loadMovies() {
-        guard let fileUrl = Bundle.main.url(forResource: "movies", withExtension: "json") else { return }
+        // read core data objects. fetch from Moview because we need all movies
+        let fetchRequest: NSFetchRequest<Movie> = Movie.fetchRequest()
         
+        // Sort movies by alphabetical order
+        let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        /*
+         instantiating fetchedResultsController. needs fetchRequest and context(extension created in UIViewController+CoreData)
+        */
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        
+        /*
+         Claims this class as delegate from fetchedResultsController. It will be responsible to be called when something happens with the movies context.
+         */
+        fetchedResultsController.delegate = self
         do {
-            // Varíavel para capturar os dados do JSON
-            let data = try Data(contentsOf: fileUrl)
-            
-            // Decoficando o JSON em um Array de movie
-            movies = try JSONDecoder().decode([Movie].self, from: data)
-
-            
-        } catch {print(error.localizedDescription)}
+            // Requisiting movies
+            try fetchedResultsController.performFetch()
+        } catch {
+            print("Erro ao carregar filmes: \(error)")
+        }
     }
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1    }
+        return 1
+    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return movies.count
+        
+        // return count of objects in fetchedResultsController
+        return fetchedResultsController.fetchedObjects?.count ?? 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MovieTableViewCell
-
-        let movie = movies[indexPath.row]
+        
+        let movie = fetchedResultsController.object(at: indexPath)
         
         cell.lbTitle?.text = movie.title
         cell.lbSummary?.text = movie.summary
-        cell.ivMovie.image = UIImage(named: movie.image)
+        cell.ivMovie.image = movie.image as? UIImage
 
         return cell
     }
@@ -102,11 +119,17 @@ class MoviesTableViewController: UITableViewController {
         if let vc = segue.destination as? ViewController {
             
             // IndexPath used to get index of movies
-            let movie = movies[tableView.indexPathForSelectedRow!.row]
+            let movie = fetchedResultsController.object(at: tableView.indexPathForSelectedRow!)
             
             // Sending movie to next screen
             vc.movie = movie
         }
     }
 
+}
+
+extension MoviesTableViewController: NSFetchedResultsControllerDelegate {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.reloadData()
+    }
 }
