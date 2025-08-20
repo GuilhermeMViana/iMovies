@@ -10,31 +10,29 @@ import UIKit
 class ViewController: UIViewController {
     
     var movies: [Movie] = []
+    
+    var movie: Movie?
 
+    @IBOutlet weak var ivMovie: UIImageView!
+    @IBOutlet weak var lbTitle: UILabel!
+    @IBOutlet weak var lbCategories: UILabel!
+    @IBOutlet weak var lbDuration: UILabel!
+    @IBOutlet weak var lbRating: UILabel!
+    @IBOutlet weak var tvSummary: UITextView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-         loadMovies()
-    }
-    
-    func loadMovies() {
-        guard let fileUrl = Bundle.main.url(forResource: "movies", withExtension: "json") else { return }
         
-        do {
-            
-            // Varíavel para capturar os dados do JSON
-            let data = try Data(contentsOf: fileUrl)
-            
-            // Decoficando o JSON em um Array de movie
-            movies = try JSONDecoder().decode([Movie].self, from: data)
-            
-            
-            for movie in movies {
-                print("\(movie.title) - \(movie.rating)")
-            }
-        } catch {
-            print(error.localizedDescription)
+        if let movie = movie {
+            ivMovie.image = UIImage(named: movie.image)
+            lbTitle.text = movie.title
+            lbCategories.text = movie.categories
+            lbDuration.text = "\(movie.duration)"
+            lbRating.text = "⭐️ \(movie.rating)/10"
+            tvSummary.text = movie.summary
         }
-    
+        
+        
     }
  
 

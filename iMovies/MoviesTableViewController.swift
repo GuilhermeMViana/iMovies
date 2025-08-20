@@ -32,7 +32,7 @@ class MoviesTableViewController: UITableViewController {
             movies = try JSONDecoder().decode([Movie].self, from: data)
 
             
-        } catch {error.localizedDescription}
+        } catch {print(error.localizedDescription)}
     }
     // MARK: - Table view data source
 
@@ -92,14 +92,21 @@ class MoviesTableViewController: UITableViewController {
     }
     */
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        
+        if let vc = segue.destination as? ViewController {
+            
+            // IndexPath used to get index of movies
+            let movie = movies[tableView.indexPathForSelectedRow!.row]
+            
+            // Sending movie to next screen
+            vc.movie = movie
+        }
     }
-    */
 
 }

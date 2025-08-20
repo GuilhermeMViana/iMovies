@@ -62,6 +62,7 @@
                                     <outlet property="ivMovie" destination="8Rk-sF-O0G" id="9Ef-Z5-Y7a"/>
                                     <outlet property="lbSummary" destination="uOg-qf-uc9" id="PzB-Wj-VZU"/>
                                     <outlet property="lbTitle" destination="wnR-Ue-unu" id="7zQ-wL-vYV"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" id="5ya-FT-Zdg"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -184,6 +185,15 @@
                             <constraint firstItem="FcY-Qw-nnO" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="zoa-Ky-YhQ"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="Cde-3o-kXF"/>
+                    <connections>
+                        <outlet property="ivMovie" destination="kaP-4a-krE" id="boX-q0-w9P"/>
+                        <outlet property="lbCategories" destination="xsH-pc-4rl" id="qsE-cG-t9G"/>
+                        <outlet property="lbDuration" destination="aRZ-91-uy3" id="cCG-62-5m0"/>
+                        <outlet property="lbRating" destination="Abv-gp-BVG" id="w46-Op-fr9"/>
+                        <outlet property="lbTitle" destination="FcY-Qw-nnO" id="lNV-Yv-QPg"/>
+                        <outlet property="tvSummary" destination="UcD-Rd-rJr" id="kDq-ci-ZO6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -218,10 +228,10 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGrayColor">
-            <color red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
