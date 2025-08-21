@@ -21,7 +21,10 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         if let movie = movie {
             ivMovie.image = movie.image as? UIImage
             lbTitle.text = movie.title
@@ -30,8 +33,12 @@ class ViewController: UIViewController {
             lbRating.text = "⭐️ \(movie.rating)/10"
             tvSummary.text = movie.summary
         }
-
-        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? AddEditViewController {
+            vc.movie = movie
+        }
     }
  
 }

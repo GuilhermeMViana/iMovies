@@ -17,6 +17,7 @@ class AddEditViewController: UIViewController {
     @IBOutlet weak var tfDuration: UITextField!
     @IBOutlet weak var tvSummary: UITextView!
     @IBOutlet weak var ivMovie: UIImageView!
+    @IBOutlet weak var btnEdit: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +28,7 @@ class AddEditViewController: UIViewController {
             tfRating.text = "⭐️ \(movie.rating)/10"
             tfDuration.text = movie.duration
             tvSummary.text = movie.summary
+            btnEdit.setTitle("Edit", for: .normal)
         }
         // Do any additional setup after loading the view.
     }

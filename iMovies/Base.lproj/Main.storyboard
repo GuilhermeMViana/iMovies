@@ -139,6 +139,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="dMJ-lv-iqR"/>
                     <connections>
+                        <outlet property="btnEdit" destination="nB2-sa-knm" id="eWQ-pe-z8C"/>
                         <outlet property="ivMovie" destination="fqI-iV-Qs4" id="aam-JM-AWc"/>
                         <outlet property="tfCategories" destination="f71-rV-SZ4" id="Vsn-8R-uyQ"/>
                         <outlet property="tfDuration" destination="1Fi-w4-c7N" id="FvY-1n-zKx"/>
@@ -334,7 +335,13 @@
                             <constraint firstItem="FcY-Qw-nnO" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="zoa-Ky-YhQ"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Cde-3o-kXF"/>
+                    <navigationItem key="navigationItem" id="Cde-3o-kXF">
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="or6-Lb-egD">
+                            <connections>
+                                <segue destination="ojf-fj-VTs" kind="show" identifier="" id="l4G-uy-w1Q"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="ivMovie" destination="kaP-4a-krE" id="boX-q0-w9P"/>
                         <outlet property="lbCategories" destination="xsH-pc-4rl" id="qsE-cG-t9G"/>
@@ -367,6 +374,9 @@
             <point key="canvasLocation" x="-1182.0895522388059" y="-52.173913043478258"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="l4G-uy-w1Q"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="avengers" width="400" height="330"/>
         <image name="play" width="53" height="53"/>
